@@ -33,7 +33,7 @@ for i in $@; do
         esac 
     fi 
  
-# Check if branch exists remotely 
+    # Check if branch exists remotely 
     if ( ! git show-ref --verify --quiet refs/remotes/origin/$i); then 
         echo "Remote branch does not exist." 
     else 
