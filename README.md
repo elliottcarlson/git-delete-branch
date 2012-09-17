@@ -1,9 +1,11 @@
 Delete local and remote git branches.
 =====================================
 
+Delete one or more branches both locally and remotely.
+
 Usage:
 
-		$ deletebranch.sh [branchname]
+		$ deletebranch.sh [branchname1] [branchnameX]
 
 Example output:
 
