@@ -8,8 +8,7 @@ if [ $# -ne 1 ]; then
 fi 
  
 # Check if branch exists locally 
-git show-ref --verify --quiet refs/heads/$1 
-if [ $? -ne 0 ]; then 
+if ( ! git show-ref --verify --quiet refs/heads/$1 ); then 
     echo "Local branch does not exist" 
 else 
     echo -e $(git show --pretty=format:"$1 branch last updated: %cr" $1 -- | head -n 1)\\n
@@ -36,8 +35,7 @@ else
 fi 
  
 # Check if branch exists remotely 
-git show-ref --verify --quiet refs/remotes/origin/$1 
-if [ $? -ne 0 ]; then 
+if ( ! git show-ref --verify --quiet refs/remotes/origin/$1); then 
     echo "Remote branch does not exist." 
 else 
     echo "Are you sure you want to delete the remote $1 branch? <Y>es or <N>o" 
