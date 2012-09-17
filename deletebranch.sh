@@ -9,8 +9,7 @@ fi
 
 for i in $@; do
     # Check if branch exists locally 
-    git show-ref --verify --quiet refs/heads/$i
-    if [ $? -ne 0 ]; then 
+    if ( ! git show-ref --verify --quiet refs/heads/$1 ); then 
         echo "Local branch does not exist" 
     else 
         echo -e $(git show --pretty=format:"$i branch last updated: %cr" $i -- | head -n 1)\\n
@@ -36,8 +35,7 @@ for i in $@; do
     fi 
  
 # Check if branch exists remotely 
-    git show-ref --verify --quiet refs/remotes/origin/$i
-    if [ $? -ne 0 ]; then 
+    if ( ! git show-ref --verify --quiet refs/remotes/origin/$1); then 
         echo "Remote branch does not exist." 
     else 
         echo "Are you sure you want to delete the remote $1 branch? <Y>es or <N>o" 
