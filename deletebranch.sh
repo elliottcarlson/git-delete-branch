@@ -9,12 +9,12 @@ fi
 
 for i in $@; do
     # Check if branch exists locally 
-    if ( ! git show-ref --verify --quiet refs/heads/$1 ); then 
+    if ( ! git show-ref --verify --quiet refs/heads/$i ); then 
         echo "Local branch does not exist" 
     else 
         echo -e $(git show --pretty=format:"$i branch last updated: %cr" $i -- | head -n 1)\\n
 
-        echo "Are you sure you want to delete the local $1 branch? <Y>es or <N>o" 
+        echo "Are you sure you want to delete the local $i branch? <Y>es or <N>o" 
         read -s -n1 REPLY 
         case $REPLY in 
             y | Y) 
@@ -24,21 +24,20 @@ for i in $@; do
                     echo "Unable to delete local branch. Aborting." 
                     exit 
                 else 
-                    echo "Local branch $1 deleted." 
+                    echo "Local branch $i deleted." 
                 fi 
                 ;; 
             *) 
                 echo "Skipping deletion of local branch." 
-                exit 
                 ;; 
         esac 
     fi 
  
 # Check if branch exists remotely 
-    if ( ! git show-ref --verify --quiet refs/remotes/origin/$1); then 
+    if ( ! git show-ref --verify --quiet refs/remotes/origin/$i); then 
         echo "Remote branch does not exist." 
     else 
-        echo "Are you sure you want to delete the remote $1 branch? <Y>es or <N>o" 
+        echo "Are you sure you want to delete the remote $i branch? <Y>es or <N>o" 
         read -s -n1 REPLY 
         case $REPLY in 
             y | Y) 
@@ -48,7 +47,7 @@ for i in $@; do
                     echo "Unable to delete remote branch. Aborting." 
                     exit 
                 else 
-                    echo "Remote branch $1 deleted." 
+                    echo "Remote branch $i deleted." 
                 fi 
                 ;; 
             *) 
