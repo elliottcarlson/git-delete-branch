@@ -1,4 +1,5 @@
-#/bin/bash 
+#!/usr/bin/env bash
+
 # Ensure a branch name was given 
 if [ $# -ne 1 ]; then 
     echo "Error in $0 - Invalid argument count" 
@@ -11,7 +12,7 @@ git show-ref --verify --quiet refs/heads/$1
 if [ $? -ne 0 ]; then 
     echo "Local branch does not exist" 
 else 
-    echo -e `git show --pretty=format:"$1 branch last updated: %cr" $1 -- | head -n 1`\\n
+    echo -e $(git show --pretty=format:"$1 branch last updated: %cr" $1 -- | head -n 1)\\n
 
     echo "Are you sure you want to delete the local $1 branch? <Y>es or <N>o" 
     read -s -n1 REPLY 
