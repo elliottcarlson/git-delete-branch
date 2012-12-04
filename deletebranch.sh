@@ -7,6 +7,7 @@ if [ $# -lt 1 ]; then
     exit 
 fi 
 
+# Loop through the branches
 for i in $@; do
     # Check if branch exists locally 
     if ( ! git show-ref --verify --quiet refs/heads/$i ); then 
