@@ -15,6 +15,12 @@ for i in $@; do
     else 
         echo -e $(git show --pretty=format:"$i branch last updated: %cr" $i -- | head -n 1)\\n
 
+        if ( ! git branch --merged | grep -c --silent $i ); then
+            bold=`tput bold`
+            normal=`tput sgr0`
+            echo "${bold}Warning${normal}: Branch has not been merged in to master yet!"
+        fi
+
         echo "Are you sure you want to delete the local $i branch? <Y>es or <N>o" 
         read -s -n1 REPLY 
         case $REPLY in 
