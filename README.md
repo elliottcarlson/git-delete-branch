@@ -5,11 +5,11 @@ Delete one or more branches both locally and remotely.
 
 Usage:
 
-	$ deletebranch.sh [branchname1] [branchnameX]
+	$ git delete-branch [branchname1] [branchnameX]
 
 Example output:
 
-	$ deletebranch.sh [branchname]
+	$ git delete-branch [branchname]
 	[branchname] branch last updated: 8 weeks ago
 		
 	Are you sure you want to delete the local [branchname] branch? <Y>es or <N>o
@@ -20,20 +20,22 @@ Example output:
 	Remote branch [branchname] deleted.
 	$
 
-Add git branch tab completion.
-==============================
+Installation.
+=============
 
-Included is an additional bash script to add tab completion of branch names. You can either
-run it in the current environment for the current terminal session, or by adding it to your
-.bashrc file.
+Simply copy this script into a directory on your path (/usr/local/bin for example) and then 
+give it executable permissions (```chmod 755 /usr/local/bin/git-delete-branch```).
 
-Current terminal session:
+Optional git branch tab completion.
+===================================
 
-		$ . ./deletebranch_autocomplete.sh
+This depends on the standard ```git-completion.sh``` script available commonly on the Internet.
+Just add this to the file and get auto-completion of branch names.
 
-.bashrc line:
-
-		source /path/to/deletebranch_autocomplete.sh
-
-Once you have added the autocompletion script, you can simply type deletebranch.sh and then press
-TAB twice to list the branches available or to complete the branch name you have started to type.
+```bash
+    _git_delete_branch ()
+    {
+        __git_complete_strategy && return
+        __gitcomp_nl "$(__git_refs)"
+    }
+```
